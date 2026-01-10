@@ -145,33 +145,6 @@ You can modify or extend this file without changing the core code.
 - Python 3.10+ (project tested with Python 3.12)
 - (Optional but recommended) Virtual environment
 
-### Setup
-
-From the project root (`ai_travel_planner/`):
-
-1. Create and activate a virtual environment (you can adapt names/paths):
-
-   ```bash
-   python -m venv .venv
-   .venv\Scripts\activate
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Run the Streamlit app:
-
-   ```bash
-   streamlit run app.py
-   ```
-
-4. Open the URL shown in the terminal (usually `http://localhost:8501`).
-
-Then fill the form and click **"Generate Itinerary"** to see the plan.
-
 ---
 
 ## 7. What This Project *Does Not* Do
@@ -188,15 +161,5 @@ It is a **safe, contained, educational project** that shows how to use
 AI‑style thinking (rules + simple generation) to solve a real problem for
 students.
 
----
-
-## 8. Viva / Presentation Points
-
-You can confidently say:
-
-- "We used a rule‑based AI approach instead of training a complex model."
-- "The itinerary is generated day‑wise with cost estimates and student tips."
-- "All data is local and stored in a JSON file, so there is no privacy issue."
-- "Streamlit provides a simple and interactive UI for entering preferences."
 
 Use the **live demo link** plus a short explanation of the flow to give a strong, clear project presentation.
