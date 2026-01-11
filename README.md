@@ -47,8 +47,6 @@ data and simple rule‑based logic.
 - `requirements.txt` – Python dependencies
 - `README.md` – project documentation (this file)
 
-This separation is simple to understand and easy to explain during viva.
-
 ---
 
 ## 4. How the System Works

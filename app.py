@@ -22,7 +22,9 @@ def main() -> None:
     st.markdown(
         """
         <style>
-        /* Use Times New Roman for main content in the app */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        /* Use Inter for main content in the app */
         html, body,
         [class^="css"],
         .stMarkdown, .stText,
@@ -32,11 +34,11 @@ def main() -> None:
         .stTextInput, .stDateInput, .stRadio, .stCheckbox,
         .stAlert, .stSidebar, .st-expander, .st-expanderHeader,
         .st-bw, .st-bx, .st-by, .st-bz {
-            font-family: "Times New Roman", Times, serif !important;
+            font-family: "Inter", sans-serif !important;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: "Times New Roman", Times, serif !important;
+            font-family: "Inter", sans-serif !important;
             font-weight: bold;
         }
 
