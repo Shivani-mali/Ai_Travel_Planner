@@ -88,102 +88,119 @@ Repository root: `Ai_Travel_Planner/`
 - `requirements.txt` – Python dependencies
 - `README.md` – project documentation (this file)
 
----
-
-🧮 Algorithm Overview (Rule-Based AI)
-
-1. **Collect inputs** – city, days, budget, interests, travel type.
-2. **Load & filter data** – read `places_data.json` and keep only matching city/interest/type.
-3. **Estimate maximum sightseeing days** based on how many places are available.
-4. **Auto-limit trip days** if user input exceeds realistic sightseeing capacity.
-5. **Sort places by affordability** (cheaper, student-friendly options first).
-6. **Generate itinerary** – distribute places across days without repetition.
-7. **Compute costs** – approximate per-day and total trip cost.
-8. **Display results** – show trip summary, budget hints, and student tips.
-
-This is a **greedy, rule-based heuristic**, easy to explain in viva and documentation.
+This separation is simple to understand and easy to explain during viva.
 
 ---
 
-🚀 Installation & Local Deployment
+## 4. How the System Works
+
+### Step 1 – User Input
+The student enters:
+- Destination city (e.g., Bangalore, Mysore, Goa)
+- Number of days
+- Total budget
+- Interests (nature, food, culture, adventure, shopping, history)
+- Travel type (solo / friends)
+
+### Step 2 – AI Travel Planner Logic
+`travel_logic.py` implements **rule‑based AI**:
+- Calculates approximate **budget per day**.
+- Filters places that match the selected **interests** and **travel type**.
+- Prefers student‑friendly, low‑cost options.
+- Avoids repeating the same place on multiple days.
+
+### Step 3 – Budget & Preference Matching
+- Cheaper places are selected first (simple greedy strategy).
+- If budget is low, more free / low‑cost options are chosen.
+- If preferences are too strict and remove most places, the system falls back
+  to a balanced set so the itinerary is never empty.
+
+### Step 4 – Personalized Itinerary Generation
+For each day (Day 1, Day 2, …):
+- 2–4 places are selected.
+- An approximate **day cost** is estimated.
+- Student tips and local advice are attached.
+
+### Step 5 – Display in Streamlit UI
+- Day‑wise itinerary with expand/collapse sections.
+- Each place shows:
+  - Name
+  - Category (nature/food/culture/...)
+  - Approximate cost
+  - Why it is recommended
+  - Student‑specific tip
+  - Optional **Google Maps** link
+- Overall estimated cost and budget warnings are displayed.
+
+---
+
+## 5. File‑Level Overview
+
+### `app.py` – UI Layer
+
+- Built using **Streamlit**.
+- Handles the **user input form**:
+  - Destination, days, budget, interests, travel type.
+- Calls `generate_itinerary(...)` from `travel_logic.py`.
+- Displays:
+  - Trip summary (destination, days, estimated total cost).
+  - Day‑wise itinerary with collapsible sections.
+  - Student‑focused tips and optional map links.
+
+### `travel_logic.py` – AI Logic Layer
+
+Implements simple, explainable AI logic:
+
+- Loads data from `data/places_data.json`.
+- Filters places based on:
+  - Selected interests
+  - Travel type (solo / friends)
+- Computes a **daily budget** from the total budget and number of days.
+- Uses a simple **greedy algorithm**:
+  - Sorts places by approximate cost.
+  - Picks cheaper places first until the daily budget is roughly filled.
+  - Tries not to repeat the same place on multiple days.
+- Returns a structured Python dictionary (destination, days, costs, tips).
+
+You can clearly say that this is **rule‑based AI**, not heavy machine learning.
+
+### `data/places_data.json` – Sample Data
+
+- Small, easy‑to‑read JSON file.
+- Contains example cities like **Bangalore, Mysore, Goa**.
+- For each place it stores:
+  - Name
+  - Categories (nature, food, culture, adventure, shopping, history)
+  - Approximate student‑budget cost
+  - Time required (rough estimate)
+  - Student tips
+  - Optional Google Maps link
+
+You can modify or extend this file without changing the core code.
+
+---
+
+## 6. Running the Project Locally
 
 ### Prerequisites
-
-- Python **3.10+** (project tested with Python 3.12)
-- `pip` for installing dependencies
-
-### Steps
-
-```bash
-git clone https://github.com/Shivani-mali/Ai_Travel_Planner.git
-cd Ai_Travel_Planner
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-The application will open in your browser at:
-
-- http://localhost:8501
+- Python 3.10+ (project tested with Python 3.12)
+- (Optional but recommended) Virtual environment
 
 ---
 
-☁️ Deployment (Streamlit Cloud or Similar)
+## 7. What This Project *Does Not* Do
 
-- **Main file path:** `app.py`
-- **Dependencies:** managed via `requirements.txt`
-- Uses deployment-safe **relative paths** to load `data/places_data.json`
-- Does **not** require any external APIs, databases, or secrets
+Good to mention clearly (especially in viva):
 
----
+- ❌ No ticket or hotel booking
+- ❌ No payment gateway
+- ❌ No live hotel or flight prices
+- ❌ No heavy ML model training
+- ❌ No external real‑time APIs
 
-📊 Dataset Information
+It is a **safe, contained, educational project** that shows how to use
+AI‑style thinking (rules + simple generation) to solve a real problem for
+students.
 
-The project uses Kaggle datasets, processed offline into a compact JSON file:
 
-- `Top Indian Places to Visit.csv` – Indian tourist attractions (names, categories, locations)
-- `travel cost.csv` – approximate student-level travel and local cost information
-
-These CSVs are cleaned and merged using `build_places_from_kaggle.py` to produce:
-
-- `data/places_data.json` – optimized for fast, offline use inside the app.
-
-No live scraping or API calls are performed; all data is local.
-
----
-
-🔮 Future Scope
-
-- Advanced personalization using past preferences
-- Real-time updates using weather and transport data
-- Smarter budget optimization with seasonal trends
-- Deeper map and navigation integration
-- Group and family travel planning
-- Expansion to more Indian cities and states
-
----
-
-🎓 Academic Relevance
-
-This project demonstrates:
-
-- Rule-based AI system design and evaluation
-- Data preprocessing and transformation (CSV → JSON)
-- Budget-aware decision-making logic
-- End-to-end Python web application using Streamlit
-- Explainable AI concepts suitable for viva and presentations
-
-It is well-suited for **final-year projects**, **minor projects**, and **academic evaluations**.
-
----
-
-👩‍💻 Author
-
-- **Name:** Shivani Satish Mali  
-- **Institute:** Sanjay Ghodawat Institute, Atigre
-
----
-
-🙏 Acknowledgement
-
-This project was developed under the guidance and support of the **EDUNET FOUNDATION**,
-providing hands-on experience in AI, data processing, and application development.
+Use the **live demo link** plus a short explanation of the flow to give a strong, clear project presentation.
