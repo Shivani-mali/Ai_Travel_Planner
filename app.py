@@ -22,16 +22,7 @@ def main() -> None:
     st.markdown(
         """
         <style>
-        /* Inter variable font with optical sizing */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap');
-
-        /* Base Inter style, similar to the snippet you shared */
-        .inter-text {
-            font-family: "Inter", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
         /* Use Inter for main content in the app */
         html, body,
@@ -44,15 +35,11 @@ def main() -> None:
         .stAlert, .stSidebar, .st-expander, .st-expanderHeader,
         .st-bw, .st-bx, .st-by, .st-bz {
             font-family: "Inter", sans-serif !important;
-            font-optical-sizing: auto !important;
-            font-style: normal !important;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: "Inter", sans-serif !important;
-            font-weight: 600 !important;
-            font-optical-sizing: auto !important;
-            font-style: normal !important;
+            font-weight: bold;
         }
 
         /* Make links clearly visible */
